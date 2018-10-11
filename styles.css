@@ -1,0 +1,131 @@
+html {
+    font-size: 65.2%;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 1.6rem;
+    font-family: 'Fredoka One', serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    background: #4105cc;
+}
+
+.sentence-display {
+    width: 75%;
+    padding: 2rem;
+    background: white;
+    position: relative;
+    margin-top: 10rem;
+    transform: skew(-30deg);
+    box-shadow: 1rem .5rem .1rem #ff0cff;
+    transition: all .3s ease;
+}
+
+.sentence-display:hover {
+    box-shadow: 2rem 1.5rem .1rem #ff0cff;
+}
+
+/* Material style */
+button {
+    border: none;
+    cursor: pointer;
+    margin-top: 3rem;
+    color: white;
+    padding: 15px 40px;
+    border-radius: 2px;
+    font-size: 22px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, .4);
+    background: #ff0cff;
+    transition: border-bottom .1s ease
+}
+
+button:focus {
+    border-bottom: solid .4rem #d9ff01;
+}
+
+/* Ripple magic */
+button {
+    position: relative;
+    overflow: hidden;
+}
+
+button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, .5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 1;
+    }
+
+    20% {
+        transform: scale(25, 25);
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+button:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+.sentence {
+    word-wrap: break-word;
+    transform: skew(30deg);
+    transition: all .3s;
+}
+
+.sentence-animate {
+    transform: skew(30deg) translateX(10px);
+}
+
+.main-display {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.main-display h1 {
+    text-shadow: 1.5rem .5rem .1rem #ff0cff;
+    font-size: 40rem;
+    transition: all 1s ease-out;
+    margin: 0;
+    transform: rotate(-5deg)
+}
+
+.animation {
+    color: #d9ff01;
+    transform: rotate(5deg) !important;
+}
+
+.trail {
+    /* className for the trail elements */
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background: #ff0cff;
+}
