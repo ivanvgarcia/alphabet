@@ -3,26 +3,89 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Alphabet</title>
     <link rel="stylesheet" href="styles.css">
-
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
-
 </head>
 
 <body>
     <div class="container">
-        <div class="sentence-display">
+
+        <!-- Top controls bar -->
+        <div class="controls-bar">
+            <div class="mode-buttons">
+                <button class="mode-btn active" data-mode="alphabet" aria-label="Alphabet mode">ABC</button>
+                <button class="mode-btn" data-mode="letters" aria-label="Letters only mode">Letter</button>
+                <button class="mode-btn" data-mode="numbers" aria-label="Numbers mode">123</button>
+            </div>
+            <button class="mute-btn" id="muteBtn" aria-label="Toggle sound">🔊</button>
+        </div>
+
+        <!-- Sentence display (hidden in letters/numbers mode) -->
+        <div class="sentence-display" id="sentenceDisplay">
             <p class="sentence">
                 Start typing and watch the letters change!
             </p>
         </div>
-        <button class="clear-button">Clear</button>
 
+        <!-- Main letter display -->
         <div class="main-display">
-            <h1 class="letter-input">A</h1>
+            <h1 class="letter-input" id="letterInput">A</h1>
+            <div class="letter-name" id="letterName">A</div>
+        </div>
+
+        <!-- Counter and clear row -->
+        <div class="counter-row">
+            <div class="letter-counter" id="letterCounter">0 letters</div>
+            <button class="clear-button">Clear</button>
+        </div>
+
+        <!-- Letter button grid (A-Z) -->
+        <div class="letter-grid" id="letterGrid">
+            <button class="letter-btn" data-letter="A">A</button>
+            <button class="letter-btn" data-letter="B">B</button>
+            <button class="letter-btn" data-letter="C">C</button>
+            <button class="letter-btn" data-letter="D">D</button>
+            <button class="letter-btn" data-letter="E">E</button>
+            <button class="letter-btn" data-letter="F">F</button>
+            <button class="letter-btn" data-letter="G">G</button>
+            <button class="letter-btn" data-letter="H">H</button>
+            <button class="letter-btn" data-letter="I">I</button>
+            <button class="letter-btn" data-letter="J">J</button>
+            <button class="letter-btn" data-letter="K">K</button>
+            <button class="letter-btn" data-letter="L">L</button>
+            <button class="letter-btn" data-letter="M">M</button>
+            <button class="letter-btn" data-letter="N">N</button>
+            <button class="letter-btn" data-letter="O">O</button>
+            <button class="letter-btn" data-letter="P">P</button>
+            <button class="letter-btn" data-letter="Q">Q</button>
+            <button class="letter-btn" data-letter="R">R</button>
+            <button class="letter-btn" data-letter="S">S</button>
+            <button class="letter-btn" data-letter="T">T</button>
+            <button class="letter-btn" data-letter="U">U</button>
+            <button class="letter-btn" data-letter="V">V</button>
+            <button class="letter-btn" data-letter="W">W</button>
+            <button class="letter-btn" data-letter="X">X</button>
+            <button class="letter-btn" data-letter="Y">Y</button>
+            <button class="letter-btn" data-letter="Z">Z</button>
+        </div>
+
+        <!-- Number button grid (1-10, shown in numbers mode) -->
+        <div class="number-grid hidden" id="numberGrid">
+            <button class="letter-btn number-btn" data-letter="1">1</button>
+            <button class="letter-btn number-btn" data-letter="2">2</button>
+            <button class="letter-btn number-btn" data-letter="3">3</button>
+            <button class="letter-btn number-btn" data-letter="4">4</button>
+            <button class="letter-btn number-btn" data-letter="5">5</button>
+            <button class="letter-btn number-btn" data-letter="6">6</button>
+            <button class="letter-btn number-btn" data-letter="7">7</button>
+            <button class="letter-btn number-btn" data-letter="8">8</button>
+            <button class="letter-btn number-btn" data-letter="9">9</button>
+            <button class="letter-btn number-btn" data-letter="10">10</button>
         </div>
 
     </div>
