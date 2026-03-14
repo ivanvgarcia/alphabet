@@ -8,22 +8,90 @@ body {
     padding: 0;
     font-size: 1.6rem;
     font-family: 'Fredoka One', serif;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
+/* ── Layout ─────────────────────────────────────────────────────────────────── */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
     background: #4105cc;
+    padding-bottom: 2rem;
 }
 
+/* ── Controls bar ────────────────────────────────────────────────────────────── */
+.controls-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.mode-btn {
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding: 0.8rem 1.8rem;
+    border-radius: 2.5rem;
+    font-size: 1.8rem;
+    font-family: 'Fredoka One', serif;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: none;
+    margin: 0;
+}
+
+.mode-btn.active,
+.mode-btn:focus {
+    background: #ff0cff;
+    border-bottom: none;
+}
+
+.mode-btn:active {
+    transform: scale(0.95);
+}
+
+.mute-btn {
+    border: none;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    font-size: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.1s;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mute-btn:active {
+    transform: scale(0.9);
+}
+
+/* ── Sentence display ────────────────────────────────────────────────────────── */
 .sentence-display {
     width: 75%;
     padding: 2rem;
     background: white;
     position: relative;
-    margin-top: 10rem;
+    margin-top: 3rem;
     transform: skew(-30deg);
     box-shadow: 1rem .5rem .1rem #ff0cff;
     transition: all .3s ease;
@@ -33,25 +101,132 @@ body {
     box-shadow: 2rem 1.5rem .1rem #ff0cff;
 }
 
-/* Material style */
-button {
-    border: none;
-    cursor: pointer;
-    margin-top: 3rem;
-    color: white;
-    padding: 15px 40px;
-    border-radius: 2px;
-    font-size: 22px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, .4);
-    background: #ff0cff;
-    transition: border-bottom .1s ease
+.sentence {
+    word-wrap: break-word;
+    transform: skew(30deg);
+    transition: all .3s;
 }
 
-button:focus {
+.sentence-animate {
+    transform: skew(30deg) translateX(10px);
+}
+
+/* ── Main letter display ─────────────────────────────────────────────────────── */
+.main-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+.main-display h1 {
+    text-shadow: 1.5rem .5rem .1rem #ff0cff;
+    font-size: 30rem;
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+    margin: 0;
+    transform: rotate(-5deg);
+    line-height: 1;
+}
+
+.letter-name {
+    font-size: 4rem;
+    color: #ffdd59;
+    margin-top: -2rem;
+    letter-spacing: 0.5rem;
+    text-transform: uppercase;
+    transition: color 0.4s ease;
+}
+
+/* ── Counter & clear row ─────────────────────────────────────────────────────── */
+.counter-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.letter-counter {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 2rem;
+}
+
+/* ── Clear button ────────────────────────────────────────────────────────────── */
+.clear-button {
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding: 1.2rem 4rem;
+    border-radius: 2px;
+    font-size: 2.2rem;
+    font-family: 'Fredoka One', serif;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, .4);
+    background: #ff0cff;
+    transition: border-bottom .1s ease;
+    margin: 0;
+    min-width: 12rem;
+    min-height: 4.8rem;
+}
+
+.clear-button:focus {
     border-bottom: solid .4rem #d9ff01;
 }
 
-/* Ripple magic */
+/* ── Letter / number button grid ─────────────────────────────────────────────── */
+.letter-grid,
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+    width: 100%;
+    max-width: 72rem;
+    box-sizing: border-box;
+}
+
+.number-grid {
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 52rem;
+}
+
+.letter-btn {
+    border: none;
+    cursor: pointer;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1.2rem;
+    font-size: 2.4rem;
+    font-family: 'Fredoka One', serif;
+    padding: 0;
+    min-width: 4.8rem;
+    min-height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.15s, transform 0.1s, box-shadow 0.1s;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Assign color bands across the alphabet */
+.letter-btn:nth-child(7n+1)  { background: #ff4757; }
+.letter-btn:nth-child(7n+2)  { background: #ff6b81; }
+.letter-btn:nth-child(7n+3)  { background: #ffa502; }
+.letter-btn:nth-child(7n+4)  { background: #2ed573; }
+.letter-btn:nth-child(7n+5)  { background: #1e90ff; }
+.letter-btn:nth-child(7n+6)  { background: #a29bfe; }
+.letter-btn:nth-child(7n+7)  { background: #ff0cff; }
+
+.letter-btn:active,
+.letter-btn:focus {
+    transform: scale(0.92);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.15);
+    border-bottom: none;
+}
+
+/* Ripple effect on all buttons */
 button {
     position: relative;
     overflow: hidden;
@@ -92,40 +267,78 @@ button:focus:not(:active)::after {
     animation: ripple 1s ease-out;
 }
 
-.sentence {
-    word-wrap: break-word;
-    transform: skew(30deg);
-    transition: all .3s;
-}
-
-.sentence-animate {
-    transform: skew(30deg) translateX(10px);
-}
-
-.main-display {
-    display: flex;
-    align-items: center;
-    color: white;
-}
-
-.main-display h1 {
-    text-shadow: 1.5rem .5rem .1rem #ff0cff;
-    font-size: 40rem;
-    transition: all 1s ease-out;
-    margin: 0;
-    transform: rotate(-5deg)
-}
-
+/* ── Letter animations ───────────────────────────────────────────────────────── */
 .animation {
     color: #d9ff01;
     transform: rotate(5deg) !important;
 }
 
+@keyframes bounce {
+    0%   { transform: rotate(-5deg) scale(1); }
+    30%  { transform: rotate(5deg)  scale(1.15); }
+    60%  { transform: rotate(-3deg) scale(0.95); }
+    100% { transform: rotate(-5deg) scale(1); }
+}
+
+@keyframes spin {
+    0%   { transform: rotate(-5deg); }
+    40%  { transform: rotate(360deg) scale(1.1); }
+    100% { transform: rotate(-5deg) scale(1); }
+}
+
+.bounce {
+    animation: bounce 0.5s ease-out forwards;
+}
+
+.spin {
+    animation: spin 0.6s ease-out forwards;
+}
+
+/* ── Mouse trail ─────────────────────────────────────────────────────────────── */
 .trail {
-    /* className for the trail elements */
     position: absolute;
     height: 8px;
     width: 8px;
     border-radius: 50%;
     background: #ff0cff;
+}
+
+/* ── Utility ─────────────────────────────────────────────────────────────────── */
+.hidden {
+    display: none !important;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .main-display h1 {
+        font-size: 20rem;
+    }
+
+    .letter-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .number-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .sentence-display {
+        width: 90%;
+        margin-top: 1.5rem;
+    }
+
+    .mode-btn {
+        font-size: 1.4rem;
+        padding: 0.6rem 1.2rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .main-display h1 {
+        font-size: 15rem;
+    }
+
+    .letter-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
